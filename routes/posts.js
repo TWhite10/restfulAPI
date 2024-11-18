@@ -76,35 +76,36 @@ router
     if (post) res.json(post);
     else next();
   });
-//get /api/post?usersID=<VALUE>
-//this is not working 
 
+//get /api/post?usersID=<VALUE
+//Retrieves all posts by a user with the specified postId.
+// Not working = http://localhost:3000/api/posts?userId=3&api-key=perscholas
+//comment out the other -  .route("/") for this to work as intended
 router
   .route("/")
  
   .get( (req, res, next) => {
-    const userId = req.query.userId;
 
-    //console.log("working one")
+    const userId = Number(req.query.userId);
+
+
     if (userId){
-      const postsbyUser = posts.filter(post => post.userId ==userId);
-
-      if (postsbyUser.length === 0){
      
+      const postsbyUserr = posts.filter(p => Number(p.userId) == userId);
+      if (postsbyUserr.length === 0){
         next(error(404, "No Posts Found"));
-        return
-  
+        return;
     }
     
-     res.status(200).json({
-       posts : postsbyUser
+     res.json({
+       posts : postsbyUserr
     });
     } else{
-      res.status(200).json({
+      res.json({
         posts : posts
      });
-    }
-
+    };
+   
 
    });
 

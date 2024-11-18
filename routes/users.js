@@ -81,12 +81,12 @@ router
     if (user) res.json(user);
     else next();
   });
-//Retrieves all posts by a user with a specific id- http://localhost:3000/api/users/2/posts?api-key=perscholas
+//w - Retrieves all posts by a user with a specific id- http://localhost:3000/api/users/2/posts?api-key=perscholas
 router
   .route("/:id/posts")
   .get( (req, res, next) => {
 
-    const postsbyUser = posts.filter(posts => posts.userId == req.params.id);
+    const postsbyUser = posts.filter(posts => posts.userId === req.params.id);
     if (postsbyUser.length ===0){
      
         next(error(404, "No Posts Found"));
