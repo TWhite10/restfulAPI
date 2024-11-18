@@ -71,6 +71,7 @@ const posts = [
         "ea velit perferendis earum ut voluptatem voluptate itaque iusto\ntotam pariatur in\nnemo voluptatem voluptatem autem magni tempora minima in\nest distinctio qui assumenda accusamus dignissimos officia nesciunt nobis",
     },
   ];
-  
+
+ 
   module.exports = posts;
   

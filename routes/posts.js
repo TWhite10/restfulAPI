@@ -76,5 +76,37 @@ router
     if (post) res.json(post);
     else next();
   });
+//get /api/post?usersID=<VALUE>
+//this is not working 
+
+router
+  .route("/")
+ 
+  .get( (req, res, next) => {
+    const userId = req.query.userId;
+
+    //console.log("working one")
+    if (userId){
+      const postsbyUser = posts.filter(post => post.userId ==userId);
+
+      if (postsbyUser.length === 0){
+     
+        next(error(404, "No Posts Found"));
+        return
+  
+    }
+    
+     res.status(200).json({
+       posts : postsbyUser
+    });
+    } else{
+      res.status(200).json({
+        posts : posts
+     });
+    }
+
+
+   });
 
 module.exports = router;
+ 

@@ -3,6 +3,7 @@ const router = express.Router();
 
 const users = require("../data/users");
 const error = require("../utilities/error");
+const posts = require("../data/posts");
 
 router
   .route("/")
@@ -80,5 +81,23 @@ router
     if (user) res.json(user);
     else next();
   });
+//Retrieves all posts by a user with a specific id- http://localhost:3000/api/users/2/posts?api-key=perscholas
+router
+  .route("/:id/posts")
+  .get( (req, res, next) => {
+
+    const postsbyUser = posts.filter(posts => posts.userId == req.params.id);
+    if (postsbyUser.length ===0){
+     
+        next(error(404, "No Posts Found"));
+  
+    }
+  
+    res.status(200).json({
+       posts : postsbyUser
+    });
+
+   });
+
 
 module.exports = router;
